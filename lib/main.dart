@@ -1,8 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_indicator/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'screens/user_progress_screen.dart';
+import 'screens/admin_login_screen.dart';
 
-Future<void> main() async {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -12,9 +15,15 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Live Progress',
+      routes: {
+        '/': (_) => const UserProgressScreen(),
+        '/admin-login': (_) => const AdminLoginScreen(),
+      },
+    );
   }
 }
